@@ -1,0 +1,250 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #111;
+  background: #fff;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;  
+
+}
+
+header {
+  width: 100%;
+  background-color: #121212; 
+  padding: 25px 0;
+}
+
+.header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-testi {
+  display: inline-block;
+  width: 70%;          
+  vertical-align: middle;
+}
+
+.header-testi h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.header-testi p {
+  font-size: 14px;
+  color: #a0a0a0;
+}
+#button-tema {
+  float: right;  
+  width: 25px;
+  width: 110px;       
+  border: 1px solid #666;
+  background: transparent;
+  color: #ffffff;
+  padding: 8px 0;
+  font-size: 13px;
+  border-radius: 6px;
+  text-align: center;
+  float: right;        
+}
+
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.card-form {
+  background-color:gray;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-form h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+
+.form-inserimento {
+  width: 100%;
+}
+
+.form-inserimento input {
+  display: inline-block;
+  padding: 8px;
+  margin-right: 10px;
+  
+}
+
+
+.form-inserimento select {
+  display: inline-block;
+  padding: 8px;
+   width: 26%;
+}
+
+.form-inserimento button {
+  display: block;
+  margin-top: 15px; 
+  padding: 10px 10px;
+  border-radius: 5px;
+  background-color: #cca01d; 
+  color: white;
+  border: none;
+  width: 0%;
+}
+
+
+
+.card-secondo-form {
+  background-color: gray;
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-secondo-form h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+
+
+.form-cercare {
+  width: 100%;
+}
+
+.form-cercare input {
+  display: inline-block;
+  padding: 8px;
+  width: 50%;
+}
+
+
+.form-cercare select {
+  display: inline-block;
+  padding: 8px;
+    width: 22%;
+}
+
+.form-cercare button {
+  display: block;
+  margin-top: 15px; 
+  padding: 10px 10px;
+  border-radius: 5px;
+  background-color: #cca01d; 
+  color: white;
+  border: none;
+   width: 20%;
+}
+
+#titoloVideogioco {
+  width: 28%;
+}
+
+#aggiungiDeveloper{
+  width: 25%;
+}
+
+#aggiungiAnno {
+  width: 12%;
+}
+
+#statoLettura {
+  width: 15%;
+}
+
+
+#bottone-invia {
+  width: 14%;
+  margin-right: 0; 
+  background-color: #cca01d; 
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+#bottone-invia:hover {
+  background-color: #b08915;
+}
+.cardbox-statistiche {
+  background-color: gray;
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+
+.card-lista {
+  background-color: gray;
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+li button.elimina {
+  padding: 4px 12px;
+  font-size: 13px;
+  border-color: #c23b3b;
+  color: #c23b3b;
+  background: #ffffff;
+}
+
+li button.elimina:hover {
+  background: #c23b3b;
+  color: #ffffff;
+}
+
+
+#notifica {
+  display: none;
+}

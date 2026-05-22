@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week Project — Settimana III</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="header-testi">
+        <h1>La mia bibioteca di videogiochi</h1>
+        <p>Aggiungi i videogiochi che hai giocato o che vuoi giocare</p>
+      </div>
+      <button type="button" id="button-tema">Tema scuro</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="card-form">
+
+      <h4>Aggiungi un videogioco</h4>
+
+      <form class="form-inserimento" id="primoForm">
+        <input type="text" id="titoloVideogioco" placeholder="Titolo" />
+        <input type="text" id="aggiungiDeveloper" placeholder="Developer" />
+        <input type="number" id="aggiungiAnno" placeholder="Anno" />
+
+        <select id="statoVideogioco">
+          <option value="da-giocare">Da giocare</option>
+          <option value="giocato">Giocati</option>
+        </select>
+
+        <button type="submit" id="bottone-invia">Aggiungi</button>
+      </form>
+    </div>
+
+    <div class="card-secondo-form">
+      <form class="form-cercare" id="secondoForm">
+        <input type="text" id="titoloVideogioco_o_autore" placeholder="Cerca per titolo o developer" />
+        <select id="statoLista">
+          <option value="giocatiTutti">Tutti</option>
+          <option value="videogiochiGiaGiocati">Giocati</option>
+          <option value="videogiochiDaGiocare">Da giocare</option>
+        </select>
+        <select id="annata">
+          <option value="annoCrescente">Anno crescente</option>
+          <option value="annoCrescente">Anno decrescente</option>
+        </select>
+
+
+      </form>
+    </div>
+    <div class="cardbox-statistiche"></div>
+    <div class="card-statistiche"></div>
+    <section class="controlli"></section>
+    <section class="statistiche"></section>
+    </div>
+
+
+
+<div class="card-lista">
+
+<section class="lista" id="lista-videogiochi"></section>
+
+</div>
+
+   
+
+    </div>
+
+
+    </div>
+
+
+    <div id="notifica">
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script src="assets/js/script.js"></script>
+</body>
+
+</html>
