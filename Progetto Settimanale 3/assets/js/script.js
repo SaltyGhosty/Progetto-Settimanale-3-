@@ -1,149 +1,211 @@
-/*
-REGOLE
-- Le risposte vanno scritte in JavaScript sotto questi commenti.
-- Pattern fondamentale: stato -> render() -> eventi.
-  Tutto cio' che vedi a schermo dipende dallo stato.
-  Gli eventi modificano lo stato e poi chiamano render().
-- Apri index.html nel browser. Apri la console (DevTools) per gli errori.
-- Cerca su MDN solo i concetti dichiarati come "cerca tu":
-  localStorage, Blob/URL.createObjectURL, FileReader.
-  Tutto il resto e' stato visto in settimana.
-- Niente AI per generare codice. Niente template scaricati.
-*/
 let videogiochi = [
- {id: 0, nome:"Soulframe", developer:"Digital Extremes", anno:"2026", stato:"giocato"},
- {id: 1, nome:"Subnautica 2", developer:"Unknown Worlds Entertainment", anno:"2026", stato:"da giocare"},
- {id: 2, nome:"Dune: Awakening", developer:"Funcom", anno:"2025", stato:"giocato"},
- {id: 3, nome:"Pragmata", developer:"Capcom", anno:"2026", stato:"giocato"},
- {id: 4, nome:"Final Fantasy VII", developer:"Square", anno:"1997", stato:"da giocare"}
-]
+    { id: 0, nome: "Soulframe", developer: "Digital Extremes", anno: "2026", stato: "giocato" },
+    { id: 1, nome: "Subnautica 2", developer: "Unknown Worlds Entertainment", anno: "2026", stato: "da giocare" },
+    { id: 2, nome: "Dune: Awakening", developer: "Funcom", anno: "2025", stato: "giocato" },
+    { id: 3, nome: "Pragmata", developer: "Capcom", anno: "2026", stato: "giocato" },
+    { id: 4, nome: "Final Fantasy VII", developer: "Square", anno: "1997", stato: "da giocare" }
+];
 
-let filtro = "tutti";
-let ordinamento = "nome-asc";
-let ricerca = "";
+let bottoneTema = document.getElementById("button-tema");
+if (bottoneTema) {
+    bottoneTema.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+            bottoneTema.textContent = "Tema chiaro";
+        } else {
+            bottoneTema.textContent = "Tema scuro";
+        }
+    });
+}
 
+function renderVideogiochi() {
+    let contenitoreLista = document.getElementById("lista-videogiochi");
+    if (!contenitoreLista) return;
+    contenitoreLista.innerHTML = "";
 
-/* STATO
-   In cima al file definisci poche variabili globali:
-   - un array di oggetti come dato principale (es. libri, ricette, film, ...)
-   - una variabile per il filtro corrente
-   - una variabile per l'ordinamento corrente
-   - una variabile per la stringa di ricerca corrente
-*/
+    let valoreRicerca = document.getElementById("titoloVideogioco_o_autore").value.toLowerCase();
+    let valoreFiltro = document.getElementById("statoLista").value;
+    let valoreOrdine = document.getElementById("annata").value;
 
-/* RENDER()
-   Una sola funzione che ridipinge la lista. A ogni chiamata:
-   1) parte dall'array completo,
-   2) filtra,
-   3) ordina,
-   4) svuota il container DOM,
-   5) ricrea gli elementi DOM per gli oggetti risultanti.
-   Aggiorna anche conteggi e statistiche.
-   Salva lo stato in localStorage in fondo a render() (cerca tu come funziona).
-*/
-function render () {}
-  let risultati = videogiochi
-    
-/* SCRIVI QUI LA TUA RISPOSTA */
+    let lista = [];
+    for (let i = 0; i < videogiochi.length; i++) {
+        let g = videogiochi[i];
 
+        let corrispondeRicerca =
+            g.nome.toLowerCase().includes(valoreRicerca) ||
+            g.developer.toLowerCase().includes(valoreRicerca);
 
-/* FORM CON VALIDAZIONE
-   addEventListener("submit") sul form.
-   event.preventDefault().
-   Leggi i valori con .value.trim().
-   Se uno dei campi obbligatori e' vuoto, mostra errore e return.
-   Altrimenti push allo stato, form.reset(), render().
-   Id univoco con Date.now().
-*/
+        let corrispondeFiltro =
+            valoreFiltro === "giocatiTutti" ||
+            (valoreFiltro === "videogiochiGiaGiocati" && g.stato === "giocato") ||
+            (valoreFiltro === "videogiochiDaGiocare" && g.stato === "da giocare");
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        if (corrispondeRicerca && corrispondeFiltro) {
+            lista.push(g);
+        }
+    }
 
+    lista.sort(function (a, b) {
+        if (valoreOrdine === "annoCrescente") {
+            return Number(a.anno) - Number(b.anno);
+        } else {
+            return Number(b.anno) - Number(a.anno);
+        }
+    });
 
-/* INTERAZIONI BASE — eliminare, modificare, contare
-   - Elimina: filter per id, render(). Event delegation sul container.
-   - Modifica in-place: button "Modifica". Al click il testo diventa <input>,
-     si conferma con Invio o blur.
-   - Conteggi dinamici dentro render().
-*/
+    for (let i = 0; i < lista.length; i++) {
+        let gioco = lista[i];
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        let riga = document.createElement("div");
+        riga.className = "gioco-item";
+        if (gioco.stato === "giocato") {
+            riga.classList.add("stato-giocato");
+        } else {
+            riga.classList.add("stato-da-giocare");
+        }
 
+        let bloccoTesto = document.createElement("div");
+        bloccoTesto.className = "gioco-testi";
 
-/* RICERCA, FILTRO, ORDINAMENTO
-   - Ricerca live: <input> con event "input". Salva in stato e render().
-   - Filtro: <select> con event "change". Salva in stato e render().
-   - Ordinamento: due button (o select). Salva in stato e render().
-   I tre si compongono dentro render() in fila.
-*/
+        let titolo = document.createElement("strong");
+        titolo.className = "gioco-titolo";
+        titolo.textContent = gioco.nome;
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        let meta = document.createElement("span");
+        meta.className = "gioco-meta";
+        meta.textContent = gioco.developer + " — " + gioco.anno;
 
+        bloccoTesto.appendChild(titolo);
+        bloccoTesto.appendChild(meta);
 
-/* NOTIFICHE TEMPORANEE
-   Funzione notifica(testo) che imposta il testo del <div id="notifica">,
-   lo mostra (display: block), poi dopo 3000ms (setTimeout) lo nasconde.
-*/
+        let badge = document.createElement("span");
+        if (gioco.stato === "giocato") {
+            badge.className = "gioco-badge badge-giocato";
+            badge.textContent = "Giocato";
+        } else {
+            badge.className = "gioco-badge badge-da-giocare";
+            badge.textContent = "Da giocare";
+        }
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        let bottoneStato = document.createElement("button");
+        bottoneStato.type = "button";
+        bottoneStato.className = "bottone-azione bottone-stato";
+        if (gioco.stato === "giocato") {
+            bottoneStato.textContent = "Segna da giocare";
+        } else {
+            bottoneStato.textContent = "Segna giocato";
+        }
+        bottoneStato.addEventListener("click", function () {
+            for (let j = 0; j < videogiochi.length; j++) {
+                if (videogiochi[j].id === gioco.id) {
+                    if (videogiochi[j].stato === "giocato") {
+                        videogiochi[j].stato = "da giocare";
+                    } else {
+                        videogiochi[j].stato = "giocato";
+                    }
+                    break;
+                }
+            }
+            renderVideogiochi();
+        });
 
+        let bottoneModifica = document.createElement("button");
+        bottoneModifica.type = "button";
+        bottoneModifica.className = "bottone-azione bottone-modifica";
+        bottoneModifica.textContent = "Modifica";
+        bottoneModifica.addEventListener("click", function () {
+            let nuovoNome = prompt("Nuovo titolo:", gioco.nome);
+            if (nuovoNome && nuovoNome.trim() !== "") {
+                for (let j = 0; j < videogiochi.length; j++) {
+                    if (videogiochi[j].id === gioco.id) {
+                        videogiochi[j].nome = nuovoNome.trim();
+                        break;
+                    }
+                }
+                renderVideogiochi();
+            }
+        });
 
-/* TEMA CHIARO/SCURO
-   Un button che chiama document.body.classList.toggle("dark").
-   In CSS scrivi le regole opposte (es. body.dark { background: #111; ... }).
-*/
+        let bottoneElimina = document.createElement("button");
+        bottoneElimina.type = "button";
+        bottoneElimina.className = "bottone-azione bottone-elimina";
+        bottoneElimina.textContent = "Elimina";
+        bottoneElimina.addEventListener("click", function () {
+            videogiochi = videogiochi.filter(function (g) {
+                return g.id !== gioco.id;
+            });
+            renderVideogiochi();
+        });
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        riga.appendChild(bloccoTesto);
+        riga.appendChild(badge);
+        riga.appendChild(bottoneStato);
+        riga.appendChild(bottoneModifica);
+        riga.appendChild(bottoneElimina);
+        contenitoreLista.appendChild(riga);
+    }
 
+    // Statistiche
+    let giocati = videogiochi.filter(function (g) { return g.stato === "giocato"; }).length;
+    let daGiocare = videogiochi.filter(function (g) { return g.stato === "da giocare"; }).length;
+    let totali = videogiochi.length;
 
-/* PERSISTENZA — localStorage (cerca tu su MDN)
-   - In fondo a render(), salva lo stato:
-       localStorage.setItem("dati", JSON.stringify(stato));
-   - All'avvio, prima della prima render(), carica:
-       const salvato = localStorage.getItem("dati");
-       if (salvato) stato = JSON.parse(salvato);
-*/
+    document.getElementById("stat-totali").textContent = totali;
+    document.getElementById("stat-giocati").textContent = giocati;
+    document.getElementById("stat-daGiocare").textContent = daGiocare;
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+    let percentuale = totali > 0 ? (giocati / totali) * 100 : 0;
+    let barra = document.getElementById("stat-barra");
+    if (barra) {
+        barra.style.width = percentuale + "%";
+    }
+}
 
+// Form aggiunta
+let formInserimento = document.getElementById("primoForm");
+if (formInserimento) {
+    formInserimento.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-/* RIORDINO ↑ ↓
-   Due button su ogni elemento. Click su ↑ scambia con il precedente nell'array,
-   ↓ con il successivo. Event delegation. Poi render().
-*/
+        let inputTitolo = document.getElementById("titoloVideogioco");
+        let inputDeveloper = document.getElementById("aggiungiDeveloper");
+        let inputAnno = document.getElementById("aggiungiAnno");
+        let selectStato = document.getElementById("statoVideogioco");
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        if (inputTitolo.value.trim() === "") {
+            alert("Inserisci almeno il titolo del videogioco!");
+            return;
+        }
 
+        let statoSelezionato = "";
+        if (selectStato.value === "da-giocare") {
+            statoSelezionato = "da giocare";
+        } else {
+            statoSelezionato = "giocato";
+        }
 
-/* ESPORTAZIONE / IMPORTAZIONE JSON (cerca tu su MDN)
-   - Esporta: crea un Blob con JSON.stringify(stato), genera un URL con
-     URL.createObjectURL e simula il click su un <a download>.
-   - Importa: <input type="file"> + FileReader per leggere il contenuto come
-     testo, JSON.parse, sostituisci lo stato, render().
-*/
+        let nuovoGioco = {
+            id: Date.now(),
+            nome: inputTitolo.value.trim(),
+            developer: inputDeveloper.value.trim() || "Sconosciuto",
+            anno: inputAnno.value || "—",
+            stato: statoSelezionato
+        };
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+        videogiochi.push(nuovoGioco);
+        formInserimento.reset();
+        renderVideogiochi();
+    });
+}
+setTimeout(() => {
+    document.querySelector("#notifica").style.display = "none";
+  }, 3000);
+function notifica(testo) {
+  document.querySelector("#notifica").textContent = testo;
+  document.querySelector("#notifica").style.display = "block";
+}
+document.getElementById("titoloVideogioco_o_autore").addEventListener("input", renderVideogiochi);
+document.getElementById("statoLista").addEventListener("input", renderVideogiochi);
+document.getElementById("annata").addEventListener("input", renderVideogiochi);
 
-
-/* STATISTICHE GRAFICHE
-   Almeno due indicatori: contatori grandi e/o barre orizzontali
-   (<div> con width: X% in base al dato). Aggiorna dentro render().
-*/
-
-/* SCRIVI QUI LA TUA RISPOSTA */
-
-
-/* MULTI-VISTA — lista / card / tabella
-   Una variabile globale "vista" che render() legge per decidere quale HTML
-   produrre. Tre button cambiano "vista" e chiamano render().
-*/
-
-/* SCRIVI QUI LA TUA RISPOSTA */
-
-
-/* CATEGORIE
-   Aggiungi un campo categoria nello schema. Nel form un <select> per sceglierla.
-   In render(), raggruppa con reduce in { categoria: [elementi] } e disegna un
-   header per categoria con sotto la lista di quella categoria.
-*/
-
-/* SCRIVI QUI LA TUA RISPOSTA */
+renderVideogiochi();
